@@ -64,7 +64,12 @@ public class UserController extends MultiActionController {
 		request.setCharacterEncoding("utf-8");
 		userID = request.getParameter("userID");
 		passwd = request.getParameter("passwd");
+		
+		   System.out.println("getViewName 호출 전 : ");
+		
 		String viewName=getViewName(request);
+		
+		System.out.println("getViewName 호출 후 viewName : " + viewName);
 		
 		mav.addObject("userID", userID);
 		mav.addObject("passwd", passwd);
