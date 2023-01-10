@@ -67,6 +67,7 @@ public class UserController extends MultiActionController {
 		
 		   System.out.println("getViewName 호출 전 : ");
 		
+		   // 임의로 해당 요청 주소에서 해당 이름을 가져오는 알고리즘을 따로 만들어 놓은 것. 
 		String viewName=getViewName(request);
 		
 		System.out.println("getViewName 호출 후 viewName : " + viewName);
@@ -74,23 +75,34 @@ public class UserController extends MultiActionController {
 		mav.addObject("userID", userID);
 		mav.addObject("passwd", passwd);
 		//mav.setViewName("result");
+		
+		
 		mav.setViewName(viewName);
 	    System.out.println("ViewName:"+viewName);
 		return mav;
 	}
 
 	public ModelAndView memberInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		request.setCharacterEncoding("utf-8");
+		
 	    ModelAndView mav=new ModelAndView();
+	    
+	    // 사용자로 부터 입력된 일반 데이터. 폼에서 넘어온 값. 
 	    String id=request.getParameter("id");
 	    String pwd=request.getParameter("pwd");
 	    String name=request.getParameter("name");
 	    String email=request.getParameter("email");
 
+	    //mav 데이터 등록하기.
 	    mav.addObject("id",id);
 	    mav.addObject("pwd",pwd);
 	    mav.addObject("name",name);
 	    mav.addObject("email",email);
+	    // 해당 뷰 등록하기.
+	    
+	    //memberInfo 해당 메서드 이름을 그대로 가지고 왔음. 
+	    // 해당 메서드이름으로 해당하는 뷰로 전달하는 방식. 
 	    mav.setViewName("memberInfo");
 	    return mav;
 	}
