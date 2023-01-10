@@ -18,10 +18,17 @@ isELIgnored="false" %>
    <tr align="center">
       <td>아이디</td>
       <td>비밀번호</td>
+      <td>이름</td>
+      <td>점심메뉴</td>
+      <td>가격</td>
+      
    </tr>
    <tr align="center">
       <td>${userID}</td>
       <td>${passwd}</td>
+      <td>${name}</td>
+      <td>${lunch}</td>
+      <td>${price}</td>
    </tr>
 </table>
 </body>

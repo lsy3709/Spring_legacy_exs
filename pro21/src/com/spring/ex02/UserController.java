@@ -17,6 +17,9 @@ public class UserController extends MultiActionController {
 		//테스트 하기위한 아이디와 패스워드 임시값.
 		String userID = "";
 		String passwd = "";
+		String name = "";
+		String lunch = "";
+		String price = "";
 		// ModelAndView 사용하기 위해서 해당 객체를 생성.
 		ModelAndView mav = new ModelAndView();
 		
@@ -31,10 +34,18 @@ public class UserController extends MultiActionController {
 		// 사용자가 입력한 폼에서 정보를 가져오는 역할. 
 		userID = request.getParameter("userID");
 		passwd = request.getParameter("passwd");
+		
+		name = request.getParameter("name");
+		lunch = request.getParameter("lunch");
+		price = request.getParameter("price");
 
 		//mav : ModelAndView 여기서 키와 값 의 형식으로 데이터를 저장. 
 		mav.addObject("userID", userID);
 		mav.addObject("passwd", passwd);
+		// 연습하기. 해당 컨트롤러에서 하드코딩으로 입력된 값을 해당 뷰에 넘기는 연습. 
+		mav.addObject("name",name);
+		mav.addObject("lunch",lunch);
+		mav.addObject("price",price);
 		
 		// mav 를  해당 뷰에 적요하는 부분.( 위에서 설정한 데이터를 같이 전송.)
 		// result -> 뷰 페이지를 의미. 경로 /test/result.jsp
