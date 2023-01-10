@@ -22,9 +22,9 @@
       <tr align="center">
          <td>아이디</td>
          <td>비밀번호</td>
-         <td>이름</td>
+       <!--   <td>이름</td>
          <td>점심메뉴</td>
-         <td>가격</td>
+         <td>가격</td> -->
       </tr>
       <tr align="center">
          <td>
@@ -33,7 +33,7 @@
          <td>
 	    <input type="password" name="passwd" value="" size="20">
 	 </td>
-	    <td>
+	  <!--   <td>
 	    <input type="text" name="name" value="" size="20">
 	 </td>
 	    <td>
@@ -41,7 +41,7 @@
 	 </td>
 	    <td>
 	    <input type="text" name="price" value="" size="20">
-	 </td>
+	 </td> -->
       </tr>
       <tr align="center">
          <td colspan="2">

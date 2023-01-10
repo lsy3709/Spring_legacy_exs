@@ -119,7 +119,7 @@ public class UserController extends MultiActionController {
 	         System.out.println("5 end ? : "+begin);
 	      }else{
 	         end=uri.length();
-	         System.out.println("6 end 아무것도 없음. : "+begin);
+	         System.out.println("6 end 아무것도 없음. : "+end);
 	      }
 
 	      String fileName=uri.substring(begin,end);
@@ -127,12 +127,17 @@ public class UserController extends MultiActionController {
 	      System.out.println("7 fileName : "+fileName);
 	      
 	      if(fileName.indexOf(".")!=-1){
+	    	  System.out.println("8-0 fileName.lastIndexOf . 호출전: "+fileName.lastIndexOf("."));
 	         fileName=fileName.substring(0,fileName.lastIndexOf("."));
 	         System.out.println("8 fileName . : "+fileName);
+	         
+	         
 	      }
 	      if(fileName.lastIndexOf("/")!=-1){
+	    	  System.out.println("9-0 fileName.lastIndexOf(\"/\") / 호출전 : "+fileName.lastIndexOf("/"));
 	         fileName=fileName.substring(fileName.lastIndexOf("/"),fileName.length());
 	         System.out.println("9 fileName / : "+fileName);
+	         
 	      }
 	      
 	      System.out.println("10 fileName 최종 파일이름. : "+fileName);
