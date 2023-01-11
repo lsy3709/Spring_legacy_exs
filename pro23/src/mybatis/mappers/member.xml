@@ -20,10 +20,11 @@
       <result property="joinDate" column="joinDate" />
    </resultMap>
 
-
+<!-- 도움 : 최동규님  -->
+<!-- 디비로 날짜 변환된 내용을 바로 자바에 출력하기로 변경. -->
 	<select id="selectAllMemberList" resultMap="memResult">
       <![CDATA[
-         select * from t_member	order by joinDate desc	 	
+         select id, pwd, name, email, to_char(joinDate, '""YYYY"년 "MM"월 "DD"일 "day""') as joinDate from t_member order by joinDate desc	
       ]]>
 	</select>
 

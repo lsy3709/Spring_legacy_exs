@@ -1,9 +1,11 @@
 package com.spring.ex04;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,6 +121,14 @@ public class MemberServlet extends HttpServlet {
            // 디비 입력시 sysdate로 입력하면, 오라클에 기본 형식으로 저장.
            // 화면에 출력할 때는, sysdate로 되어 있음. 
            // 화면에 출력할 때 원하는 형식으로 변경 해보기. 
+           
+           // 결론,
+           // 디비로 함수 이용해서 원하는 형식을 변환하는 방법으로 변경.
+           // 디비에서 받고 또 자바로 처리하는 부분 2번일이라서 효율적이지 못함. 
+           // 디비에서 sql  문장에서 to_char 함수를 이용해서 변환된 날짜를 받아서
+           // 바로 출력하는게 더 효율적.
+           // 만약, 원하는 날짜 타입이 추가로 더 있다면.
+           // 해당 select 로 각 형식의 예를 더 만들어서, 아이디만 변경해서 사용하기로.
 			
            
            Map<String, String> memberMap=new HashMap<String, String>();
