@@ -6,13 +6,13 @@
      </listener-class>
    </listener>
 
-   <context-param>
+<!--    <context-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>
           /WEB-INF/config/action-service.xml
           /WEB-INF/config/action-dataSource.xml
       </param-value>
-   </context-param>
+   </context-param> -->
    
    <servlet>
       <servlet-name>action</servlet-name>
@@ -20,8 +20,8 @@
       <load-on-startup>1</load-on-startup>
    </servlet>
 
-   <servlet-mapping>
+ <!--   <servlet-mapping>
       <servlet-name>action</servlet-name>
       <url-pattern>*.do</url-pattern>
-   </servlet-mapping>
+   </servlet-mapping> -->
 </web-app>

@@ -16,8 +16,13 @@ import com.spring.member.vo.MemberVO;
 
 public class MemberDAOImpl implements MemberDAO {
 	private JdbcTemplate jdbcTemplate;
+	
 	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		// JdbcTemplate 해당 생성자 인식 못하는 부분 일단 버그. 패스
+//		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		
+		// 해당dataSource 에 있는 디비 연결 관련 정보를 읽을수 없어서 의미가 없음. 
+		this.jdbcTemplate = new JdbcTemplate();
 	}
 
 	@Override
