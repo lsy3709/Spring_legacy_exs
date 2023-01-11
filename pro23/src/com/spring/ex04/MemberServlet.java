@@ -1,7 +1,9 @@
 package com.spring.ex04;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +44,14 @@ public class MemberServlet extends HttpServlet {
 			request.setAttribute("member", memberVO);
 			nextPage = "test03/memberInfo.jsp";
 		} 
+		
+		//검색하기 위한 창 매핑 부분.
+		else if (action.equals("searchForm")) {
+			//중간에 데이터 작업 부분은 다 지움. 
+			// 이유는 해당 폼으로 가는 뷰만 있으면 되어서.
+			nextPage = "test03/searchMember.jsp";
+		} 
+		
 		// 회원 가입 창으로 가는 부분이 없어서 임시로 매핑 주소 추가 연습해보기. 
 		else if (action.equals("joinForm")) {
 			//중간에 데이터 작업 부분은 다 지움. 
@@ -95,12 +105,24 @@ public class MemberServlet extends HttpServlet {
            String id=request.getParameter("id");
            String pwd=request.getParameter("pwd");
            String name=request.getParameter("name");
-           String email = request.getParameter("email");         
+           String email = request.getParameter("email");      
+           
+           //날짜 형식은 jsp 수업 때 , 게시판에 글 등록시 사용했던 코드.
+           // 시간 형식 추가작업.
+           java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd");
+			String joinDate = formatter.format(new java.util.Date());
+			
+			   // 문자열 -> Date
+//	        Date joinDate = formatter.parse(date);
+			
+           
            Map<String, String> memberMap=new HashMap<String, String>();
            memberMap.put("id", id);
            memberMap.put("pwd", pwd);
            memberMap.put("name", name);
            memberMap.put("email", email);
+        // 시간 형식 추가작업.
+           memberMap.put("joinDate", joinDate);
            dao.insertMember2(memberMap);
            nextPage="/mem4.do?action=listMembers";
       }

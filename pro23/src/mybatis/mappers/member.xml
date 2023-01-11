@@ -66,8 +66,8 @@
 	
 	<insert id="insertMember2"  parameterType="java.util.Map">
 		<![CDATA[
-			 insert into t_member(id,pwd, name, email)
-			 values(#{id}, #{pwd}, #{name}, #{email})
+			 insert into t_member(id,pwd, name, email, joinDate)
+			 values(#{id}, #{pwd}, #{name}, #{email}, #{joinDate})
 		]]>      
    </insert>
    
@@ -92,7 +92,7 @@
 	<!-- 동적 SQL문 -->
   <select id="searchMember" parameterType="memberVO" resultMap="memResult">
       <![CDATA[
-          select * from t_member
+          select * from t_member 
       ]]>
       <where>
          <if test=" name != ''  and  name != null">
