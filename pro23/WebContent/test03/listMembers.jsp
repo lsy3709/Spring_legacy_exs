@@ -37,6 +37,7 @@
     </tr>
   </c:forEach>   
 </table>
-<a  href="${contextPath}/member/memberForm.do"><h1 style="text-align:center">회원가입</h1></a>
+<!-- 회원 가입창 호출하는 부분의 주소를 변경 -> 기존의 action 형식을 이용함. -->
+<a  href="${contextPath}/mem4.do?action=joinForm"><h1 style="text-align:center">회원가입</h1></a>
 </body>
 </html>
