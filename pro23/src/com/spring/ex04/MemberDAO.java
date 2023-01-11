@@ -1,6 +1,7 @@
 package com.spring.ex04;
 
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -98,6 +99,8 @@ public class MemberDAO {
 		return result;
     } 
     
+    // 해당 임시 객체에 이름과 메일만 있음
+    // 이객체로 검색하기. 
     public List<MemberVO>  searchMember(MemberVO  memberVO){
         sqlMapper=getInstance();
         SqlSession session=sqlMapper.openSession();
@@ -105,9 +108,15 @@ public class MemberDAO {
         return list;		
     } 
 
+    // 매개변수에 , 하드코딩된 이름이 입력된 리스트가 매개변수로 들어옴. 
+    // 현재, name : a1, b1, lsy2 이 담긴 리스트 상태입니다. 
     public List<MemberVO>  foreachSelect(List nameList){
+    	//  List<String> nameList = new ArrayList<String>()
+    	// java.util.Map test = nameList;
         sqlMapper=getInstance();
         SqlSession session=sqlMapper.openSession();
+        
+        // 디비 작업하는 member.xml 매개변수로 넘어온 리스트를 전송한다. 
         List list=session.selectList("mapper.member.foreachSelect",nameList);
         return list;		
     }
@@ -121,9 +130,12 @@ public class MemberDAO {
      }
     
     
+    //이름으로 검색하기. 
     public List<MemberVO>  selectLike(String name){
         sqlMapper=getInstance();
         SqlSession session=sqlMapper.openSession();
+        
+        // 실제 디비 검색작업은 여기서. 매개변수 2번째 자리에 넘어온 데이터를 또다시 전송.
         List list=session.selectList("mapper.member.selectLike",name);
         return list;		
     }
