@@ -48,6 +48,20 @@ public class MemberServlet extends HttpServlet {
 			// 이유는 해당 폼으로 가는 뷰만 있으면 되어서.
 			nextPage = "test03/memberForm.jsp";
 		} 
+		//뷰에서 수정 링크 부분 클릭 시, 해당 아이디를 조회해서
+		// 해당 아이디에 맞는 정보를 , 회원 수정창에서 가져오기까지.
+		//url 매핑의 주소: updateForm
+		else if (action.equals("updateForm")) {
+			// 해당 링크의 ? 뒤에 속성 부분에 이름을 id로 해서
+			// 가져올 때도 id로 가져오기.
+			String id = request.getParameter("id");
+			// id에 맞는 정보를 가져와서 임시 객체에 담아두기. 
+			memberVO = dao.selectMemberById(id);
+			// 뷰에서 사용하려면 request 에 데이터를(한명의 회원의 정보) 담아두기 
+			request.setAttribute("member", memberVO);
+			// 뷰에서 사용할 때 member. 해당 getter로 가져오기.  
+			nextPage = "test03/modMember.jsp";
+		}
 		
 		else if (action.equals("selectMemberByPwd")) {
 			int pwd = Integer.parseInt(request.getParameter("value"));
@@ -89,7 +103,9 @@ public class MemberServlet extends HttpServlet {
            memberMap.put("email", email);
            dao.insertMember2(memberMap);
            nextPage="/mem4.do?action=listMembers";
-      }else if(action.equals("updateMember")){
+      }
+       // 회원 수정창에 입력 후, 버튼 클릭시, 업데이트를 처리하는 부분. 
+       else if(action.equals("updateMember")){
           String id=request.getParameter("id");
           String pwd=request.getParameter("pwd");
           String name=request.getParameter("name");

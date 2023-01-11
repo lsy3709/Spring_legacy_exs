@@ -20,12 +20,14 @@
 </style>
 </head>
 <body>
+<!-- 해당 아이디에 대한 정보를 가져와서 보여주는 형식은 
+회원 목록에서 회원을 가져오는 기능을 벤치 마킹.  -->
 	<form method="post"   action="${contextPath}/mem4.do?action=updateMember">
 	<h1  class="text_center">회원 정보 수정창</h1>
 	<table  align="center">
 	   <tr>
 	      <td width="200"><p align="right">아이디</td>
-	      <td width="400"><input type="text" name="id"></td>
+	      <td width="400"><input type="text" name="id" value=${member.id}></td>
 	   </tr>
 	   <tr>
 	      <td width="200"><p align="right">비밀번호</td>
