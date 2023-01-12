@@ -23,7 +23,7 @@
 
 	<select id="selectAllMemberList" resultMap="memResult">
       <![CDATA[
-         select * from t_member	order by joinDate desc	 	
+         select id, pwd, name, email, to_char(joinDate, '""YYYY"년 "MM"월 "DD"일 "day""') as joinDate from t_member order by joinDate desc	
       ]]>
 	</select>
 
@@ -61,15 +61,15 @@
     
      <insert id="insertMember"  parameterType="memberVO">
 		<![CDATA[
-		 insert into t_member(id,pwd, name, email)
-		 values(#{id}, #{pwd}, #{name}, #{email})
+		 insert into t_member(id,pwd, name, email,joinDate)
+		 values(#{id}, #{pwd}, #{name}, #{email}, sysdate)
 		]]>      
 	</insert>
 	
-	<insert id="insertMember2"  parameterType="java.util.HashMap">
+<insert id="insertMember2"  parameterType="java.util.Map">
 		<![CDATA[
-			 insert into t_member(id,pwd, name, email)
-			 values(#{id}, #{pwd}, #{name}, #{email})
+			 insert into t_member(id,pwd, name, email, joinDate)
+			 values(#{id}, #{pwd}, #{name}, #{email}, sysdate)
 		]]>      
    </insert>
    

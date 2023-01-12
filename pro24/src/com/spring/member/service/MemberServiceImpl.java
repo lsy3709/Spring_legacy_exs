@@ -47,5 +47,13 @@ public class MemberServiceImpl  implements MemberService{
 		return memberDAO.getMember(id);
 	}
 
+	// 현재 위치 2번.
+	// 작업을 memberDAO 3번에게 요청함. 
+	// addMember 코드를 참고해서 작성함. 
+	@Override
+	public int updateMember(MemberVO membeVO) throws DataAccessException {
+		return memberDAO.updateMember(membeVO);
+	}
+
 
 }

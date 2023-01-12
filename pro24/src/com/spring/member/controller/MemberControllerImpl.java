@@ -149,19 +149,35 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		request.setCharacterEncoding("utf-8");
 		MemberVO memberVO = new MemberVO();
 		
+		// 회원 아이디는 읽기전용이라서 그대로 가져오고,
+		// 나머지 정보는 변경된 내용을 가져오는 작업. 
 		String id=request.getParameter("id");
-		/*
 		String pwd=request.getParameter("pwd");
 		String name=request.getParameter("name");
 		String email = request.getParameter("email");
+		
+		// 변경된 데이터를 옮기기 위해서, 임시 객체에 담는 작업. 
 		memberVO.setId(id);
 		memberVO.setPwd(pwd);
 		memberVO.setName(name);
 		memberVO.setEmail(email);
-		 */
-		bind(request, memberVO);
+		
+		// 실제 디비 작업 합니다. 
+		// 1번 -> 2번 -> 3번 -> 4번 -> 5번
+		// 한명 회원의 정보를 담은 객체를 전달하는 과정.
+		// result 수정이 되었다면 1로 반환해서 확인하는 용도.
+// 현재 위치 1번
 		int result = 0;
-		result = memberService.addMember(memberVO);
+		// 업데이트 하는 기능은 memberService 2번에게 요청하기. 
+		result = memberService.updateMember(memberVO);
+		if(result == 1) {
+			String str = "회원 수정 성공 했음." ;
+		} else {
+			String str2 = "회원 수정 성공 안했음.";
+		}
+//		바인딩 작업은 뒤에서 설명 후 사용할 예정.
+//		bind(request, memberVO);
+		// 수정이 되었다면, 목록으로 가기. 
 		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
 		return mav;
 	}	

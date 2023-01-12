@@ -34,6 +34,7 @@
         <props>
           <prop key="/member/listMembers.do" >listMembers</prop>
           <prop key="/member/addMember.do" >addMember</prop>
+          <prop key="/member/updateMember.do" >updateMember</prop>
           <prop key="/member/removeMember.do">removeMember</prop>
           <prop key="/member/memberForm.do" >form</prop>
           <prop key="/member/updateForm.do" >updateForm</prop>

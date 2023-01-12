@@ -1,6 +1,6 @@
 package com.spring.member.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class MemberVO {
 	private String id;

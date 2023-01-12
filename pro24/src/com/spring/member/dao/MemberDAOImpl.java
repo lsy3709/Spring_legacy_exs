@@ -55,4 +55,14 @@ public class MemberDAOImpl implements MemberDAO {
 		MemberVO memberVO = (MemberVO) sqlSession.selectOne("mapper.member.selectMemberById", id);
 		return memberVO;
 	}
+
+	// 넘어온 한명의 회원의 정보를 가지고, update 하기. 
+	// member.xml에서 업데이트하는 태그가 있다면 그대로 사용하고, 
+	// 만약, 없다면 태그를 만들어야함. 
+	// 찾아보니, 아이디가 : updateMember 만들어져 있어서, 사용함.
+	@Override
+	public int updateMember(MemberVO memberVO) throws DataAccessException {
+		int result = sqlSession.update("mapper.member.updateMember", memberVO);
+		return result;
+	}
 }

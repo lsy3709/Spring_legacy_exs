@@ -11,6 +11,9 @@ public interface MemberDAO {
 	 public List selectAllMemberList() throws DataAccessException;
 	 public int insertMember(MemberVO memberVO) throws DataAccessException ;
 	 
+	 // 업데이트 멤버 기능 추가. 
+	 public int updateMember(MemberVO memberVO) throws DataAccessException ;
+	 
 	 //getMember 라는 메서드 만들기. 
 	 public MemberVO getMember(String id) throws DataAccessException ;
 	 public int deleteMember(String id) throws DataAccessException;
