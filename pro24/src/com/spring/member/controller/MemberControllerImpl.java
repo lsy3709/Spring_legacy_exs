@@ -58,7 +58,12 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		memberVO.setName(name);
 		memberVO.setEmail(email);
 		 */
+		// 위에 사용자로 부터 입력 받은 값을 다시 임시 객체 memberVO에 할당 하는 작업
+		// bind 로 대체 가능함. 
 		bind(request, memberVO);
+		
+		// memberVO 에 값이 setter로 들어간 효과가 있음. 
+		
 		int result = 0;
 		result = memberService.addMember(memberVO);
 		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
