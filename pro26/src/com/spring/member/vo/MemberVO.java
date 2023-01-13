@@ -1,6 +1,7 @@
 package com.spring.member.vo;
 
-import java.sql.Date;
+// java.sql.Date -> java.util.Date;
+import java.util.Date;
 
 import org.springframework.stereotype.Component;
 

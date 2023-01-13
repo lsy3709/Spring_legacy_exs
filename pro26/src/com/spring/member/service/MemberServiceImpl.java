@@ -22,6 +22,10 @@ import com.spring.member.vo.MemberVO;
 // 2개의 단위기능이 다 정상 동작 해야지 마지막에 커밋함. 
 @Transactional(propagation = Propagation.REQUIRED)
 public class MemberServiceImpl implements MemberService {
+	
+	//  @Autowired -> DI, xml 파일에서 해당 빈 객체에 ref 속성으로 주입했음. 
+	// 방식은 , 생성자 또는 세터 형식으로 주입했음. 
+	// 이제는 	@Autowired 한줄로 대체가능. 
 	@Autowired
 	private MemberDAO memberDAO;
 

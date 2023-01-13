@@ -22,6 +22,10 @@ import com.spring.member.vo.MemberVO;
 // @Controller : 컴포넌트 스캔에서 해당 패키지명을 등록해서, 이 애너테이션을보면.
 // 컴파일러가 이 클래스는 기능이 Controller 역할을 하는구나. 
 // 
+//action-servlet.xml 파일에서 
+// 해당 스캔 위치를 한번 더 확인함. 
+// <context:component-scan base-package="com.spring.member"/>
+
 @Controller("memberController")
 public class MemberControllerImpl   implements MemberController {
 	
