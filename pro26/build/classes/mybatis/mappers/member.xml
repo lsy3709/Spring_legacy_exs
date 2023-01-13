@@ -26,17 +26,17 @@
    </resultMap>
 
 
-	<select id="selectAllMemberList" resultMap="memResult">
+<!-- 	<select id="selectAllMemberList" resultMap="memResult">
       <![CDATA[
          select id, pwd, name, email, joinDate from t_member order by joinDate desc	
       ]]>
-	</select>
+	</select> -->
 	
-	<!-- <select id="selectAllMemberList" resultMap="memResult">
+	<select id="selectAllMemberList" resultMap="memResult">
       <![CDATA[
          select id, pwd, name, email, to_char(joinDate, '""YYYY"년 "MM"월 "DD"일 "day""') as joinDate from t_member order by joinDate desc	
       ]]>
-	</select> -->
+	</select>
 
 	<select id="selectName" resultType="String">
     <![CDATA[
