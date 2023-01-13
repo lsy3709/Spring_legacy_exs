@@ -29,6 +29,23 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 
+	//회원 가입 하는 부분에서 샘플 코드 이용.
+	   // return memberDAO.insertMember(memberVO);
+	   // 현재 위치는 2번. 디비에 직접 접근하는 기능이 있는 3번에게 도움을 요청. 
+	@Override
+	public MemberVO getMember(String id) throws DataAccessException {
+
+		return memberDAO.getMember(id);
+	}
+
+	// 현재 위치 2번.
+	// 작업을 memberDAO 3번에게 요청함. 
+	// addMember 코드를 참고해서 작성함. 
+	@Override
+	public int updateMember(MemberVO membeVO) throws DataAccessException {
+		return memberDAO.updateMember(membeVO);
+	}
+	
 	@Override
 	public List listMembers() throws DataAccessException {
 		List membersList = null;
