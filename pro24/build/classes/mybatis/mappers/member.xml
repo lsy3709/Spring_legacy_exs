@@ -20,6 +20,7 @@
       <result property="joinDate" column="joinDate" />
    </resultMap> -->
 
+<!--  현위치 4 -->
 
 	<select id="selectAllMemberList" resultMap="memResult">
       <![CDATA[
