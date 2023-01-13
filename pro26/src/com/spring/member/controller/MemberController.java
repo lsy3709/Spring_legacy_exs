@@ -10,9 +10,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.member.vo.MemberVO;
 //현위치 1번. 
+// 26장에서 데이터 바인딩 기법이 애너테이션을 이용해서, 바인딩 하는 형식이 변경됨. 
 public interface MemberController {
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	// @ModelAttribute : MemberVO 의 형으로 데이터를 받겠다. 
+	// info : 뷰에서 사용할 변수명.
 	public ModelAndView addMember(@ModelAttribute("info") MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	// @RequestParam -> request.getParameter("id"); 대체용.
 	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

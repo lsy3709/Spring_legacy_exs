@@ -19,13 +19,25 @@ import com.spring.member.vo.MemberVO;
 
 
 //현위치 1-1
+// @Controller : 컴포넌트 스캔에서 해당 패키지명을 등록해서, 이 애너테이션을보면.
+// 컴파일러가 이 클래스는 기능이 Controller 역할을 하는구나. 
+// 
 @Controller("memberController")
 public class MemberControllerImpl   implements MemberController {
+	
+	//  @Autowired -> DI, xml 파일에서 해당 빈 객체에 ref 속성으로 주입했음. 
+	// 방식은 , 생성자 또는 세터 형식으로 주입했음. 
+	// 이제는 	@Autowired 한줄로 대체가능. 
 	@Autowired
 	private MemberService memberService;
 	@Autowired
 	MemberVO memberVO ;
 	
+	
+	//현위치 1-1
+	// @RequestMapping : value="/member/listMembers.do" 속성으로 오는 주소부분에 대해서 
+	// 처리하는 역할. 지금은 메서드 부분에 표기 되어 있지만, 
+	// 클래스에 설정해서, 하위에 나눠서 작업도 가능함. 
 	@Override
 	@RequestMapping(value="/member/listMembers.do" ,method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -36,6 +48,11 @@ public class MemberControllerImpl   implements MemberController {
 		return mav;
 	}
 
+	
+	//현위치 1-1
+	// @ModelAttribute("member") MemberVO member
+	// @ModelAttribute : MemberVO 의 형으로 데이터를 받겠다. 
+		// member : 뷰에서 사용할 변수명.
 	@Override
 	@RequestMapping(value="/member/addMember.do" ,method = RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member,
@@ -47,6 +64,8 @@ public class MemberControllerImpl   implements MemberController {
 		return mav;
 	}
 	
+	//현위치 1-1
+	//// @RequestParam -> request.getParameter("id"); 대체용.
 	@Override
 	@RequestMapping(value="/member/removeMember.do" ,method = RequestMethod.GET)
 	public ModelAndView removeMember(@RequestParam("id") String id, 
