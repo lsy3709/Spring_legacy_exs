@@ -114,12 +114,16 @@ public class MemberControllerImpl implements MemberController {
 
 		String viewName = getViewName(request);
 		ModelAndView mav = new ModelAndView();
+		
+		//위에서 받아온 정보에 대해서 데이터를 설정하기. 
+		mav.addObject(memberVO);
 		mav.setViewName(viewName);
 		return mav;
 	}
 	
 	// addMember 의 기능을 복사해서 업데이트 기능으로 변경해서 사용 할 예정. 
 		@Override
+		@RequestMapping(value = "/member/updateMember.do", method = RequestMethod.POST)
 		public ModelAndView updateMember(@ModelAttribute("info") MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception {
 			request.setCharacterEncoding("utf-8");
 			//매개 변수에서 MemberVO memberVO 해당 VO 클래스를 만들어서 필요 없음. 
@@ -151,6 +155,9 @@ public class MemberControllerImpl implements MemberController {
 	// 현재 위치 1번
 			int result = 0;
 			// 업데이트 하는 기능은 memberService 2번에게 요청하기. 
+			
+			//회원 정보의 수정된 내용이 : memberVO 에 자동으로 할당이 된 상태. 
+			
 			result = memberService.updateMember(memberVO);
 			if(result == 1) {
 				String str = "회원 수정 성공 했음." ;
