@@ -99,6 +99,15 @@ public class MemberControllerImpl implements MemberController {
 	 * @RequestMapping(value = { "/member/loginForm.do", "/member/memberForm.do" },
 	 * method = RequestMethod.GET)
 	 */
+	//로그인 폼은 하나 만들자.
+	@RequestMapping(value = "/member/loginForm.do", method = RequestMethod.GET)
+	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = getViewName(request);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
 	@RequestMapping(value = "/member/memberForm.do", method = RequestMethod.GET)
 	public ModelAndView memberForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
