@@ -35,7 +35,9 @@ import com.myspring.pro27.member.controller.MemberController;
 //<context:component-scan base-package="com.spring.member"/>
 
 public class MemberControllerImpl implements MemberController {
-
+	
+//	private static final Logger logger = LoggerFactory.getLogger(MemberControllerImpl.class);
+	
 	// @Autowired -> DI, xml 파일에서 해당 빈 객체에 ref 속성으로 주입했음.
 	// 방식은 , 생성자 또는 세터 형식으로 주입했음.
 	// 이제는 @Autowired 한줄로 대체가능.
@@ -52,6 +54,9 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
+		System.out.println("viewName :==================== "+viewName);
+//		logger.info("info 레벨 : ==================== "  + viewName);
+//		logger.debug("debug 레벨 :====================  "  + viewName);
 		List membersList = memberService.listMembers();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("membersList", membersList);

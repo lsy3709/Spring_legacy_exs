@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,6 +29,8 @@ import com.spring.member.vo.MemberVO;
 @Controller("memberController")
 public class MemberControllerImpl implements MemberController {
 
+	
+	
 	// @Autowired -> DI, xml 파일에서 해당 빈 객체에 ref 속성으로 주입했음.
 	// 방식은 , 생성자 또는 세터 형식으로 주입했음.
 	// 이제는 @Autowired 한줄로 대체가능.
@@ -43,6 +47,7 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
+		
 		List membersList = memberService.listMembers();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("membersList", membersList);
