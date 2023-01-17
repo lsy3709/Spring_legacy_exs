@@ -17,6 +17,7 @@
 	<div class="result-images">
 	  <c:forEach var="imageFileName" items="${ map.fileList}"  >
 	         <%-- <img src="${pageContext.request.contextPath }/download?imageFileName=${imageFileName }" style="width:150px"> --%>
+	         <%-- ${pageContext.request.contextPath } 이부분 :/pro28 --%>
 	         <img src="${pageContext.request.contextPath }/download?imageFileName=${imageFileName }">
 	         <br><br><br>
 	  </c:forEach>         

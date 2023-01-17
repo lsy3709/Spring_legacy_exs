@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-/*@Service("mailService")*/
+//@Service("mailService")
 public class MailService {
 	@Autowired
 	 private JavaMailSender mailSender;
@@ -24,7 +24,8 @@ public class MailService {
 		MimeMessageHelper messageHelper = 
 		new MimeMessageHelper(message, true, "UTF-8");
 		//messageHelper.setCc("zzzzzz@naver.com");
-		messageHelper.setFrom("�۽���@naver.com", "ȫ�浿");
+		messageHelper.setFrom("lsy3709@gmail.com", "이상용");
+		// 매개변수로 넘어온 값을 사용함. 
 		messageHelper.setSubject(subject);
 		messageHelper.setTo(to); 
 		messageHelper.setText(body );

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/*@Controller*/
+//@Controller
 @EnableAsync
 public class MailController {
     @Autowired
@@ -23,9 +23,9 @@ public class MailController {
     	request.setCharacterEncoding("utf-8");
     	response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
-        mailService.sendMail("¼ö½ÅÀÚ@naver.com","Å×½ºÆ® ¸ŞÀÏ","¾È³çÇÏ¼¼¿ä.º¸³½ ¸ŞÀÏ ³»¿ëÀÔ´Ï´Ù.");
-        mailService.sendPreConfiguredMail("Å×½ºÆ® ¸ŞÀÏÀÔ´Ï´Ù.");
-        out.print("¸ŞÀÏÀ» º¸³Â½À´Ï´Ù!!");
+        mailService.sendMail("lsy3709@naver.com","í…ŒìŠ¤íŠ¸ ë©”ì¼. ì„ì„ì‹œë¡œ ì‘ì„±í•œ ì œëª©","ì•ˆë…•í•˜ì„¸ìš”.ë³´ë‚¸ ë©”ì¼ ë‚´ìš©ì…ë‹ˆë‹¤.");
+        mailService.sendPreConfiguredMail("í…ŒìŠ¤íŠ¸ ë©”ì¼ì…ë‹ˆë‹¤.");
+        out.print("ë©”ì¼ì„ ë³´ëƒˆìŠµë‹ˆë‹¤!!");
     }
 }
 

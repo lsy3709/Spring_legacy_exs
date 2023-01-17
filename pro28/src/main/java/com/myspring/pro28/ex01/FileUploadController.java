@@ -40,23 +40,27 @@ public class FileUploadController  {
 		// 맵으로 : 키:값 형식. 
 		Map map = new HashMap();
 		// Enumeration 반복 작업을 하기위한 그룹
-		// 해당 file1, file2 .. 해당 이름을 가져옵니다. 
-		// file1 : 이미지1, file2 : 이미지2 ,file3 : 이미지3 .....
+		
+		// 수정 해당 내용은 파일 이미지가 아니고, 일반 데이터 형식.
 		Enumeration enu=multipartRequest.getParameterNames();
 		//hasMoreElements() : 해당 enu 객체에 등록된 이미지들의 객체에 하나씩 접근. 
 		while(enu.hasMoreElements()){
-			//nextElement() : file1 에 접근.
+			//nextElement() : name , id 에 접근.
 			String name=(String)enu.nextElement();
-			// file1 해당하는 실제 값을 가져 옵니다. 
+			// name , id 해당하는 실제 값을 가져 옵니다. 
 			String value=multipartRequest.getParameter(name);
 			System.out.println("name 의 값 :" + name+",value 의 값 : "+value);
 			// map 컬렉션에 객체들을 하나씩 등록
 			map.put(name,value);
-		}
-		
+		} 
+		// 일반 데이터 : 입력된 아이디 및 이름. 
+		// 윗 부분 메모리상에 임시로 해당 이미지를 가지고 있다.
+		//=============================================
 		//파일의 이미지들을 업로드 할 경로에 대해서 실제 물리 파일을 작성 하는 역할.
 		// 부모 폴더가 없다면 만들어주고
+		
 		// fileList 에 실제 파일의 이름이 담겨 있음. 
+		// 실제 업로드 경로에 파일 형식으로 저장. 
 		List fileList= fileProcess(multipartRequest);
 		
 		// 컬렉션 등록함. 키 이름 :fileList , 값 이름 : fileList
@@ -92,8 +96,10 @@ public class FileUploadController  {
 			// 이미지가 첨부가 되었다면.
 			if(mFile.getSize()!=0){ //File Null Check
 				// 해당 파일의 경로가 존재 하지 않는다면.
+				//CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
 				if(! file.exists()){ //��λ� ������ �������� ���� ���
 					// 해당 부모 폴더를 만들었다면
+					//CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
 					if(file.getParentFile().mkdirs()){ //��ο� �ش��ϴ� ���丮���� ����
 						// 해당 파일 객체를 새로 생성 하겠다. 
 						file.createNewFile(); //���� ���� ����
