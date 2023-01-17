@@ -71,9 +71,15 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 	
+	// 현재 위치 3번 , 실제 디비 작업을 하는 sqlSession 에게 도움을 요청.
+	// 실제 작업은 입력된 아이디와 패스워드 2가지 정보로 , 디비에 해당 유저가 있는지 조회 하는 과정.  
+	// 있다면, 해다 회원 정보를 memberVO 에 담아서, 역순으로 
+	// sqlSession -> dao -> service -> controller 역순으로 전달. 
 	@Override
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException{
 		  MemberVO vo = sqlSession.selectOne("mapper.member.loginById",memberVO);
+		  //역순으로 해당 디비에서 검색된 회원의 정보를 memberVO 객체에 담아서 전달합니다.
+		  // MemberVO vo 참조형 변수이름.
 		return vo;
 	}
 

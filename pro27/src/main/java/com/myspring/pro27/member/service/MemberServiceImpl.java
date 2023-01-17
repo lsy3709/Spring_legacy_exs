@@ -65,9 +65,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.deleteMember(id);
 	}
 	
-	
+	// 현재 위치 2번 로그인 처리 기능입니다. 
+	// 디비에 접근 하기 위한 DAO에게 또 도움을 요청. 
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception{
+		//역순으로 해당 디비에서 검색된 회원의 정보를 memberVO 객체에 담아서 전달합니다.
+		// MemberVO vo 참조형 변수이름.
 		return memberDAO.loginById(memberVO);
 	}
 

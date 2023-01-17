@@ -99,7 +99,7 @@ public class MemberControllerImpl implements MemberController {
 	 * @RequestMapping(value = { "/member/loginForm.do", "/member/memberForm.do" },
 	 * method = RequestMethod.GET)
 	 */
-	//로그인 폼은 하나 만들자.
+	//로그인 폼은 하나 만들자. pro27/member/loginForm.do
 	@RequestMapping(value = "/member/loginForm.do", method = RequestMethod.GET)
 	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
@@ -194,17 +194,27 @@ public class MemberControllerImpl implements MemberController {
 			return mav;
 		}	
 	
+		///member/login.do
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute("member") MemberVO member,
 				              RedirectAttributes rAttr,
 		                       HttpServletRequest request, HttpServletResponse response) throws Exception {
 	ModelAndView mav = new ModelAndView();
+	//작업 시작. 현위치 1번  controller : 모델, 뷰를 연결시켜주는 역할. 
+	// 직접적으로 모델을 다루는 기능, 뷰를 다루는 기능은 따로 없음.
+	// 그래서, 자기가 이일을 직접적으로 처리를 못하니, 다른 객체에게 도움을 요청함, 다른 객체 의존함. 
+	// 2번 service 에게 해당 기능을 요청함. 
 	memberVO = memberService.login(member);
+	// 이제 역순으로 다돌아와서 해당 memberVO = vo 재할당이 됩니다. 
 	if(memberVO != null) {
+		// 세션 객체를 생성
 		    HttpSession session = request.getSession();
+		    // 세션 객체 member 라는 이름으로 실제 값은 객체인 : memberVO
 		    session.setAttribute("member", memberVO);
+		    // 세션 객체에 isLogOn 라는 이름으로 실제 값은 불리언 : true
 		    session.setAttribute("isLogOn", true);
+		    // 로그인 후 , 해당 페이지로 리다이렉트 됩니다.
 		    mav.setViewName("redirect:/member/listMembers.do");
 	}else {
 		    rAttr.addAttribute("result","loginFailed");
@@ -216,9 +226,12 @@ public class MemberControllerImpl implements MemberController {
 	@Override
 	@RequestMapping(value = "/member/logout.do", method =  RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//세션 객체 생성후
 		HttpSession session = request.getSession();
+		// 로그 아웃 : 세션에 등록된 객체를 제거하면됩니다. 
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/member/listMembers.do");
 		return mav;
