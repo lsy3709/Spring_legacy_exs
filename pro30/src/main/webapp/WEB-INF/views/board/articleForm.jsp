@@ -12,15 +12,37 @@
 <meta charset="UTF-8">
 <title>글쓰기창</title>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- input -> this 로 해당 인스턴스를 의미.
+ex1) 
+  var num;
+  num = 초깃값;
+
+  while ( 조건식 )
+  {
+    실행문;
+    증감식;
+ex2)
+  var num;
+
+  for ( num = 1; num <= 100; num++ )
+  {
+    document.write( num, '<br>' );
+  }    
+  } -->
 <script type="text/javascript">
    function readURL(input) {
-      if (input.files && input.files[0]) {
+	   if (input != null){
+		   var num;
+		   for ( num = 0; num < input.files.length; num++ ) { 
+     
 	      var reader = new FileReader();
 	      reader.onload = function (e) {
 	        $('#preview').attr('src', e.target.result);
           }
-         reader.readAsDataURL(input.files[0]);
+         reader.readAsDataURL(input.files[num]);
       }
+		   
+	   }
   }  
   function backToList(obj){
     obj.action="${contextPath}/board/listArticles.do";

@@ -39,9 +39,14 @@
 		]]>      
 	</insert> -->
 	
-  <select id="selectNewArticleNO" resultType="int"  >
+<!--   <select id="selectNewArticleNO" resultType="int"  >
 		<![CDATA[
 			SELECT  max(articleNO)+1 from t_board		
+		]]>
+	</select> -->
+	  <select id="selectNewArticleNO" resultType="int"  >
+		<![CDATA[
+			     SELECT  nvl(max(articleNO),0) from t_board	
 		]]>
 	</select>
 	
