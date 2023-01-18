@@ -46,6 +46,14 @@ public class MemberControllerImpl implements MemberController {
 	@Autowired
 	MemberVO memberVO;
 
+	@RequestMapping(value = { "/","/main.do"}, method = RequestMethod.GET)
+	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
 	// 현위치 1-1
 	// @RequestMapping : value="/member/listMembers.do" 속성으로 오는 주소부분에 대해서
 	// 처리하는 역할. 지금은 메서드 부분에 표기 되어 있지만,
