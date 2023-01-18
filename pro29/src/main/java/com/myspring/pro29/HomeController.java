@@ -35,9 +35,10 @@ public class HomeController {
 		
 		return "home";
 	}*/
-	
+	// localhost:8090/pro29/ -> view :/WEB-INF/views/JSONTest.jsp
+	//localhost:8090/pro29/ -> view :/WEB-INF/views/JSONTest2.jsp
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-	  return "JSONTest";
+	  return "JSONTest2";
 	}
 }

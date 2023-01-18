@@ -21,14 +21,14 @@ public class BoardController {
 	
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<ArticleVO>> listArticles() {
-		logger.info("listArticles ¸Ş¼­µå È£Ãâ");
+		logger.info("listArticles ë©”ì„œë“œ í˜¸ì¶œ");
 		List<ArticleVO> list = new ArrayList<ArticleVO>();
 		for (int i = 0; i < 10; i++) {
 			ArticleVO vo = new ArticleVO();
 			vo.setArticleNO(i);
-			vo.setWriter("ÀÌ¼ø½Å"+i);
-			vo.setTitle("¾È³çÇÏ¼¼¿ä"+i);
-			vo.setContent("»õ »óÇ°À» ¼Ò°³ÇÕ´Ï´Ù."+i);
+			vo.setWriter("ì´ìˆœì‹ "+i);
+			vo.setTitle("ì•ˆë…•í•˜ì„¸ìš”"+i);
+			vo.setContent("ìƒˆ ìƒí’ˆì„ ì†Œê°œí•©ë‹ˆë‹¤."+i);
 			list.add(vo);
 		}
 		
@@ -37,21 +37,23 @@ public class BoardController {
 	
 	@RequestMapping(value = "/{articleNO}", method = RequestMethod.GET)
 	public ResponseEntity<ArticleVO> findArticle (@PathVariable("articleNO") Integer articleNO) {
-		logger.info("findArticle ¸Ş¼­µå È£Ãâ");
+		logger.info("findArticle ë©”ì„œë“œ í˜¸ì¶œ");
 		ArticleVO vo = new ArticleVO();
 		vo.setArticleNO(articleNO);
-		vo.setWriter("È«±æµ¿");
-		vo.setTitle("¾È³çÇÏ¼¼¿ä");
-		vo.setContent("È«±æµ¿ ±ÛÀÔ´Ï´Ù");
+		vo.setWriter("í™ê¸¸ë™");
+		vo.setTitle("ì•ˆë…•í•˜ì„¸ìš”");
+		vo.setContent("í™ê¸¸ë™ ê¸€ì…ë‹ˆë‹¤");
 		return new ResponseEntity(vo,HttpStatus.OK);
 	}	
 	
-	
+	//=========method = RequestMethod.POST í™•ì¸===================================================================
+	//ì „ë‹¬ë˜ëŠ” ë°©ì‹ì„ ì˜ ì²´í¬í•˜ê¸°.(value = "/{articleNO}", method = RequestMethod.PUT)
+	// value = "/{articleNO}", method = RequestMethod.DELETE)
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<String> addArticle (@RequestBody ArticleVO articleVO) {
 		ResponseEntity<String>  resEntity = null;
 		try {
-			logger.info("addArticle ¸Ş¼­µå È£Ãâ");
+			logger.info("addArticle ë©”ì„œë“œ í˜¸ì¶œ");
 			logger.info(articleVO.toString());
 			resEntity =new ResponseEntity("ADD_SUCCEEDED",HttpStatus.OK);
 		}catch(Exception e) {
@@ -61,12 +63,12 @@ public class BoardController {
 		return resEntity;
 	}	
 	
-	//¼öÁ¤ÇÏ±â
+	//ìˆ˜ì •í•˜ê¸°
 	@RequestMapping(value = "/{articleNO}", method = RequestMethod.PUT)
 	public ResponseEntity<String> modArticle (@PathVariable("articleNO") Integer articleNO, @RequestBody ArticleVO articleVO) {
 		ResponseEntity<String>  resEntity = null;
 		try {
-			logger.info("modArticle ¸Ş¼­µå È£Ãâ");
+			logger.info("modArticle ë©”ì„œë“œ í˜¸ì¶œ");
 			logger.info(articleVO.toString());
 			resEntity =new ResponseEntity("MOD_SUCCEEDED",HttpStatus.OK);
 		}catch(Exception e) {
@@ -76,12 +78,12 @@ public class BoardController {
 		return resEntity;
 	}
 	
-	//»èÁ¦ÇÏ±â
+	//ì‚­ì œí•˜ê¸°
 	@RequestMapping(value = "/{articleNO}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> removeArticle (@PathVariable("articleNO") Integer articleNO) {
 		ResponseEntity<String>  resEntity = null;
 		try {
-			logger.info("removeArticle ¸Ş¼­µå È£Ãâ");
+			logger.info("removeArticle ë©”ì„œë“œ í˜¸ì¶œ");
 			logger.info(articleNO.toString());
 			resEntity =new ResponseEntity("REMOVE_SUCCEEDED",HttpStatus.OK);
 		}catch(Exception e) {

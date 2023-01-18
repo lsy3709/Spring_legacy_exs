@@ -18,9 +18,12 @@
 	              };
   
   	$.ajax({
-  	    //type:"POST",
-        //url:"${contextPath}/boards",
-        type:"PUT",
+  		// 이부분 변경하면서 확인 중. DELETE
+  	   // type:"POST",
+       // url:"${contextPath}/boards",
+       // type:"PUT",
+       // url:"${contextPath}/boards/114",
+        type:"DELETE",
         url:"${contextPath}/boards/114",
         contentType: "application/json",
         data :JSON.stringify(article),

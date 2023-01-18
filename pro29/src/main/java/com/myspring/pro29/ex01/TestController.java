@@ -87,7 +87,7 @@ public class TestController {
       vo.setEmail("lee"+i+"@test.com");
 	  list.add(vo);
 	}
-    return new ResponseEntity(list,HttpStatus.INTERNAL_SERVER_ERROR);
+    return new ResponseEntity(list,HttpStatus.NOT_FOUND);
   }	
   
   
@@ -96,7 +96,7 @@ public class TestController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 	    String message = "<script>";
-		message += " alert('�� ȸ���� ����մϴ�.');";
+		message += " alert('responseHeaders.add 확인중.');";
 		message += " location.href='/pro29/test/membersList2'; ";
 		message += " </script>";
 		return  new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
