@@ -30,29 +30,43 @@ ex2)
   }    
   } -->
 <script type="text/javascript">
-   function readURL(input) {
-	   if (input != null){
-		   var num;
-		   for ( num = 0; num < input.files.length; num++ ) { 
-     
+var cnt=1;
+var cnt1=1;
+var cnt2=2;
+function readURL(input) {
+    if (input.files && input.files[0]) {
 	      var reader = new FileReader();
+	     
 	      reader.onload = function (e) {
-	        $('#preview').attr('src', e.target.result);
-          }
-         reader.readAsDataURL(input.files[num]);
-      }
-		   
-	   }
-  }  
+	        $('#preview'+cnt1).attr('src', e.target.result);
+        }
+       reader.readAsDataURL(input.files[0]);
+    }
+} 
+/* 테스트 */
+function readURL2(input) {
+    if (input.files && input.files[0]) {
+	      var reader = new FileReader();
+	     
+	      reader.onload = function (e) {
+	        $('#preview2').attr('src', e.target.result);
+        }
+       reader.readAsDataURL(input.files[0]);
+    }
+} 
   function backToList(obj){
     obj.action="${contextPath}/board/listArticles.do";
     obj.submit();
   }
-  
-  var cnt=1;
+ 
   function fn_addFile(){
-	  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
+	  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"+"+"' onchange="+"readURL2(this); />");
+	  
 	  cnt++;
+	   $("#previews").append("<br>"+"<img id='preview"+cnt2+"' src='#'"+ "width=200 height=200 />");
+	  /* <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
+	  <td><img  id="preview" src="#"   width=200 height=200/></td> */
+	   cnt2++;
   }  
 
 </script>
@@ -77,7 +91,7 @@ ex2)
      <tr>
 			  <td align="right">이미지파일 첨부:  </td>
 			  <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
-			  <td><img  id="preview" src="#"   width=200 height=200/></td>
+			  <td><img  id="preview1" src="#"   width=200 height=200/></td>
 			  
 			  
 			  <td align="right">이미지파일 첨부</td>
@@ -87,6 +101,7 @@ ex2)
 	   </tr>
 	   <tr>
 	      <td colspan="4"><div id="d_file"></div></td>
+	      <td colspan="4"><div id="previews"></div></td>
 	   </tr>
 	    <tr>
 	      <td align="right"> </td>
