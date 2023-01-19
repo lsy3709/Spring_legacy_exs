@@ -75,12 +75,12 @@
 	 }
 	 
 	 var cnt = 1;
-	 function readURL(input) {
+	 function readURL(input, count) {
 	     if (input.files && input.files[0]) {
 	         var reader = new FileReader();
 	         reader.onload = function (e) {
-	             $('#preview'+cnt).attr('src', e.target.result);
-	             cnt++;
+	             $('#preview'+count).attr('src', e.target.result);
+	             
 	         }
 	         reader.readAsDataURL(input.files[0]);
 	     }
@@ -137,7 +137,7 @@
 			  </tr>  
 			  <tr>
 			    <td>
-			       <input  type="file"  name="imageFileName " id="i_imageFileName"    onchange="readURL(this);"   />
+			       <input  type="file"  name="imageFileName " id="i_imageFileName"    onchange="readURL(this,${status.count});"   />
 			    </td>
 			 </tr>
 		</c:forEach>
