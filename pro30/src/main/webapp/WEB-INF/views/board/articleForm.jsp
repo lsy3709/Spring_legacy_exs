@@ -35,7 +35,7 @@ ex2)
 cnt 변수는 기존 파일 추가시 file1,file2 이런 형식으로 추가하게끔.
 */
 var cnt=1;
-var cnt1=1; 
+var cnt1=0; 
 var cnt2=0;
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -43,8 +43,10 @@ function readURL(input) {
 	     
 	      reader.onload = function (e) {
 	        $('#previewFirst').attr('src', e.target.result);
+	        /* console.log('readAsDataURL 호출 여부 확인'+reader.readAsDataURL(input.files[0])) */
         }
        reader.readAsDataURL(input.files[0]);
+       
     }
 } 
 /* 테스트 -> 파일 추가시 동적으로 할당 되게끔 함수를 조정. cnt 라는 변수를 추가해서 
@@ -57,7 +59,8 @@ function readURL2(input) {
 	     
 	      reader.onload = function (e) {
 	    	  console.log('preview 호출 전 cnt2 : '+ cnt2)
-	        $('#preview'+cnt2).attr('src', e.target.result);
+	        $('#preview'+cnt1).attr('src', e.target.result);
+	    	  cnt1++;
 	    	  console.log('preview 호출 후 cnt2 : '+ cnt2)
         }
        reader.readAsDataURL(input.files[0]);
