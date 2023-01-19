@@ -74,11 +74,13 @@
 		 form.submit();
 	 }
 	 
+	 var cnt = 1;
 	 function readURL(input) {
 	     if (input.files && input.files[0]) {
 	         var reader = new FileReader();
 	         reader.onload = function (e) {
-	             $('#preview').attr('src', e.target.result);
+	             $('#preview'+cnt).attr('src', e.target.result);
+	             cnt++;
 	         }
 	         reader.readAsDataURL(input.files[0]);
 	     }
@@ -130,7 +132,7 @@
 			   </td>
 			   <td>
 			     <input  type= "hidden"   name="originalFileName" value="${item.imageFileName }" />
-			    <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${item.imageFileName}" id="preview"  /><br>
+			    <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${item.imageFileName}" id="preview${status.count}"  /><br>
 			   </td>   
 			  </tr>  
 			  <tr>
@@ -140,7 +142,13 @@
 			 </tr>
 		</c:forEach>
  </c:if>
- 	    
+ 	     <!-- onchange="readURL(this);" -> 하는 역할 아이디가 preview 인 src 속성 값으로 , base64 인코딩 된 URL 값을 넣는 역할.  -->
+ 	     <%-- 아이디가 preview 가 동일 아이디로 계속 생성이 되어서, 하나의 이미지만 미리보기가 되어서
+ 	     이 부분은 varStatus에서 반복문에 해당 카운트를 해주는 기능을 이용해 
+ 	     preview 뒤에 숫자를 표기해서, 아이디가 중복 되는 현상을 해결. 
+ 	     preview1 -> id="preview${status.count}" 해결 .
+ 	     함수  onchange="readURL(this);" 부분에 
+ 	      $('#preview'+cnt).attr('src', e.target.result); 추가 했음.  --%>
  	 
  <%--  <c:choose> 
 	  <c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
