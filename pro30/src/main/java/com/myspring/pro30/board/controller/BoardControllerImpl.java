@@ -1,6 +1,7 @@
 package com.myspring.pro30.board.controller;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -275,27 +276,57 @@ public class BoardControllerImpl  implements BoardController{
 	// upload 메서드 기능 살펴보기. 
 	// 메모리 상에 파일 객체를 , 실제 물리 파일로 생성하고, 
 	// 해당 파일 이미지들의 원본 파일 이름을 포함한 리스트를 반환함. 
-	// 파일 이미지 예) bread.jpg 확장자 포함해서. 
-	List<String> fileList =upload(multipartRequest);
+	// 파일 이미지 예) bread.jpg 확장자 포함해서.
+	List<String> fileList;
+	List<ImageVO> imageFileList = new ArrayList<ImageVO>();
+	System.out.println("multipartRequest.getFileNames() 의 뭐가있나? " + multipartRequest.getFileNames());
+
+	
+
+	//upload 메서드 안에서 어차피 파일 관련 속성이 없어서 리턴을 null 한다. 
+	// 하지만, upload 가 호출 되기전에 분기문으로 유효성 체크를 하고 싶은게 나의 의도.
+	// 일단 시간상 임시 방편으로 upload 메서드 일단 찍고 진행 하는 걸로 합니다. 
+	// 죄송합니다. 
+	fileList =upload(multipartRequest);
+	// temp 폴더 아래에 임시로 파일을 저장한 상태
+	// 여기까지는 파일이름이 한글이 포함한 부분에서 깨지지 않음.
+	
 	
 	//imageFileList : 사용자가 업로드한 파일 이미지들을 임시로 담을 리스트.
-	List<ImageVO> imageFileList = new ArrayList<ImageVO>();
-	
-	// 파일의 이미지가 존재한다면, 아래의 알고리즘을 진행함. 
-	if(fileList!= null && fileList.size()!=0) {
+//		 imageFileList = new ArrayList<ImageVO>();
 		
-		for(String fileName : fileList) {
+		// 파일의 이미지가 존재한다면, 아래의 알고리즘을 진행함. 
+		if(fileList!= null && fileList.size()!=0) {
 			
-			//ImageVO 살펴보기. 사실은 하나의 이미지의 정보를 담을 임시 객체. DTO
-			// 파일 이미지 테이블의 컬럼과 필드과 동일 할 것임. 
-			ImageVO imageVO = new ImageVO();
-			// 임시 객체에 fileList 에서 꺼내온 하나의 파일의 이름을 임시 객체에 저장하기.
-			imageVO.setImageFileName(fileName);
-			// 하나의 이미지 객체를 또 담을 리스트에 추가합니다. 
-			imageFileList.add(imageVO);
+			for(String fileName : fileList) {
+				
+				//ImageVO 살펴보기. 사실은 하나의 이미지의 정보를 담을 임시 객체. DTO
+				// 파일 이미지 테이블의 컬럼과 필드과 동일 할 것임. 
+				ImageVO imageVO = new ImageVO();
+				// 임시 객체에 fileList 에서 꺼내온 하나의 파일의 이름을 임시 객체에 저장하기.
+				
+				
+
+				System.out.println("setImageFileName 하기 전의  fileName 의 값" + fileName);
+				
+				// 한글 깨지는 부분이
+				// this.imageFileName = URLEncoder.encode(imageFileName,"UTF-8");
+				imageVO.setImageFileName(fileName);
+				System.out.println("업로드 후의 반복문 안의 fileName 의 값" + fileName);
+				
+				System.out.println("업로드 후의 반복문 안의 fileName 의 imageVO의 get이용해서 이름 값" + imageVO.getImageFileName());
+				// 하나의 이미지 객체를 또 담을 리스트에 추가합니다. 
+				imageFileList.add(imageVO);
+			}
+			articleMap.put("imageFileList", imageFileList);
 		}
-		articleMap.put("imageFileList", imageFileList);
-	}
+	// 여기까지도 한글 이름이 포함된 파일 이미지가 깨지지 않음. 
+	
+//		List<ImageVO> imageFileList3 = (ArrayList)articleMap.get("imageFileList");
+//		for(ImageVO imageVO : imageFileList3){
+//			System.out.println("BoardController 에서 해당 파일명 깨지는지 확인 중 try 들어가기 전 : "+ imageVO.getImageFileName());
+//		}
+		
 	String message;
 	ResponseEntity resEnt=null;
 	HttpHeaders responseHeaders = new HttpHeaders();
@@ -306,14 +337,42 @@ public class BoardControllerImpl  implements BoardController{
 		//2 articleMap.put("id",id); 작성자의 아이디 
 		//3 articleMap.put("imageFileList", imageFileList); 업로드할 파일 이미지들
 		// 현재 위치 1번 -> 2번에게 요청. boardService
-		int articleNO = boardService.addNewArticle(articleMap);
-		if(imageFileList!=null && imageFileList.size()!=0) {
+		System.out.println("boardService.addNewArticle(articleMap); 호출 전");
+//		List<ImageVO> imageFileList2 = (ArrayList)articleMap.get("imageFileList");
+//		for(ImageVO imageVO : imageFileList2){
+//			System.out.println("BoardController 에서 해당 파일명 깨지는지 확인 중 반복문 안 : "+ imageVO.getImageFileName());
+//		}
+		int articleNO;
+		if(fileList!= null && fileList.size()!=0) {
+		articleNO = boardService.addNewArticleWithImage(articleMap);
+		} else {
+		articleNO = boardService.addNewArticleWithoutImage(articleMap);
+		}
+		System.out.println("boardService.addNewArticle(articleMap); 호출 후");
+//		System.out.println("imageFileList의 값: ?"+imageFileList);
+//		System.out.println("imageFileList의 get(0) 값: ?"+imageFileList.get(0).toString());
+//		System.out.println("imageFileList의 isEmpty: ?"+imageFileList.isEmpty());
+		
+		//글쓰기 시, 이미지가 없을 경우. 
+		// 일반 글만 작성하는데, multipartRequest 에 타입 형식이 파일인 경우가 포함이 안되는 데.
+		// imageFileList 안에 imageVO (null) 값이 들어가 있음. 
+		// 값이 있는 것처럼 보임. !imageFileList.isEmpty() && imageFileList!=null && imageFileList.size()!=0
+		
+		if(!imageFileList.isEmpty() && imageFileList!=null && imageFileList.size()!=0) {
+			System.out.println("if(!imageFileList.isEmpty() && imageFileList!=null && imageFileList.size()!=0) {");
 			for(ImageVO  imageVO:imageFileList) {
 				imageFileName = imageVO.getImageFileName();
+//				if(imageFileName != null) {
+				System.out.println("imageFileName의 :"+imageFileName);
 				File srcFile = new File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
+				System.out.println("srcFile 있나? "+srcFile);
 				File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+articleNO);
+				System.out.println("destDir 있나? "+destDir);
 				//destDir.mkdirs();
+				
 				FileUtils.moveFileToDirectory(srcFile, destDir,true);
+//				}
+				
 			}
 		}
 		    
@@ -390,10 +449,12 @@ public class BoardControllerImpl  implements BoardController{
 		while(fileNames.hasNext()){
 			// fileName -> name = file1, file2 ....
 			String fileName = fileNames.next();
+			System.out.println("upload 의 fileName = " + fileName);
 			//name = file1 의 속성이라고 하면 해당 정보를 담은 객체 : mFile에 할당. 
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			// mFile에서 해당 원본의 파일의 이름을 가져오기. 
 			String originalFileName=mFile.getOriginalFilename();
+			System.out.println("upload 의originalFileName = " + originalFileName);
 			// originalFileName : ex) bread.jpg
 			// 이미지 파일들을 해당 리스트에 담기. 
 			fileList.add(originalFileName);
@@ -401,7 +462,7 @@ public class BoardControllerImpl  implements BoardController{
 			File file = new File(ARTICLE_IMAGE_REPO +"\\"+ fileName);
 			
 			// mFile 의미는 이미지가 있다면. 
-			if(mFile.getSize()!=0){ //File Null Check
+			if(mFile != null && mFile.getSize()!=0){ //File Null Check
 				
 				if(! file.exists()){ //경로상에 파일이 존재하지 않을 경우
 					// 해당 부모 경로가 없을 때 최초에 한번 정도 실행이 되는 부분이라서 참고만 하기. 
